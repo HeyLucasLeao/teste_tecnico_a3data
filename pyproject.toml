@@ -1,11 +1,20 @@
 [project]
 name = "teste-tecnico-a3data"
 version = "0.1.0"
-description = ""
+description = "Assistente Virtual para Dados Epidêmicos"
 authors = [
-    {name = "Lucas Leão",email = "heylucasleao@gmail.com"}
+    {name = "Lucas Leão", email = "heylucasleao@gmail.com"}
 ]
 requires-python = ">=3.11,<3.15"
+readme = "README.md"
+
+[tool.poetry]
+name = "teste-tecnico-a3data"
+version = "0.1.0"
+description = "Assistente Virtual para Dados Epidêmicos"
+authors = ["Lucas Leão <heylucasleao@gmail.com>"]
+readme = "README.md"
+package-mode = false
 
 [tool.poetry.dependencies]
 ipykernel = "^6.30.1"
