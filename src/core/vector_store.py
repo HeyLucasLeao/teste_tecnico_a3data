@@ -3,7 +3,7 @@ from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores import FAISS
 from langchain.text_splitter import TokenTextSplitter
-from src.preprocess import do_preprocessing
+from .preprocess import do_preprocessing
 from typing import List
 from langchain_core.documents import Document
 

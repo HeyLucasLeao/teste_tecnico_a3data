@@ -1,5 +1,5 @@
 import streamlit as st
-from src.logging import logger
+from src.utils.logging import logger
 from time import time
 
 

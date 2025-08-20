@@ -1,11 +1,15 @@
 import streamlit as st
 import os
-from src.file_upload import file_uploader
-from src.vector_store import load_documents, process_reports, vector_store_in_memory
-from src.assistant import EpidemiologicalAssistant
-from src.chat_interface import chat_interface
+from src.core.vector_store import (
+    load_documents,
+    process_reports,
+    vector_store_in_memory,
+)
+from src.core.assistant import EpidemiologicalAssistant
+from src.ui.chat_interface import chat_interface
+from src.ui.file_upload import file_uploader
+from src.utils.logging import logger
 import tempfile
-from src.logging import logger
 
 
 def main():

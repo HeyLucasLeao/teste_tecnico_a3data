@@ -3,7 +3,7 @@ from transformers import AutoTokenizer, AutoModelForSeq2SeqLM, pipeline
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains import create_retrieval_chain
 from langchain.prompts import PromptTemplate
-from src.preprocess import do_preprocessing
+from .preprocess import do_preprocessing
 from langchain_community.vectorstores import FAISS
 
 
