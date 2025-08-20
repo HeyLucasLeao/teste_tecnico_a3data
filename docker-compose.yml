@@ -3,8 +3,10 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
+    image: app
+    container_name: teste-tecnico
     ports:
-      - "8501:8501"
+      - "127.0.0.1:8501:8501"
     volumes:
       - ./.streamlit:/app/.streamlit
       - ./logs:/app/logs
