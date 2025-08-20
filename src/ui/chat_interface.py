@@ -34,7 +34,6 @@ def chat_interface():
                     else:
                         st.warning("Please upload the reports first.")
                 except Exception as e:
-                    print(e)
                     error_msg = (
                         "Sorry, an error occurred while processing your question."
                     )
