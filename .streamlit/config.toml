@@ -9,4 +9,4 @@ font = "sans serif"
 headless = true
 port = 8501
 enableCORS = false
-address = "localhost"
+address = "localhost" # '0.0.0.0' Caso tente rodar via Docker!
