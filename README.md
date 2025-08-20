@@ -11,7 +11,7 @@ Teste técnico com objetivo de desenvolver um assistente conversacional baseado 
 poetry install
 
 # Executar a aplicação
-make run
+just run
 ```
 ## 3. Interface:
 - Será iniciada uma interface Streamlit
@@ -19,6 +19,8 @@ make run
 - Utilize o chat para interagir com o assistente
 
 # Utilizar via Docker
-- Make docker-build
-- Make docker-run
-- Nota: provavelmente deve demorar por conta da dependência com a biblioteca da nvidia!
+- just docker-compose
+- docker-compose up
+- basta acessar localmente `localhost:8501`, e trocar no `config.toml` para `0.0.0.0` no endereço!
+- Vale ressaltar que devido a limitaçâo nativa de capacidade do Docker, é capaz dele gargalar
+- Provavelmente deve demorar por conta da dependência com a biblioteca da nvidia!
