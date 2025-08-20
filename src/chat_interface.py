@@ -1,4 +1,6 @@
 import streamlit as st
+from src.logging import logger
+from time import time
 
 
 def chat_interface():
@@ -15,16 +17,19 @@ def chat_interface():
         with st.chat_message("assistant"):
             with st.spinner("Thinking..."):
                 try:
+                    start_time = time()
                     if st.session_state.assistant:
                         response = st.session_state.assistant.ask_question(prompt)
-                        print(response)
                         st.markdown(response)
                         st.session_state.messages.append(
                             {"role": "assistant", "content": response}
                         )
 
-                        ## Log interaction
-                        # logger.info(f"Question: {prompt} | Answer: {response}")
+                        logger.info(f"Question: {prompt} | Answer: {response}")
+                        end_time = time()
+                        logger.debug(
+                            f"Processing time: {end_time - start_time:.2f} seconds"
+                        )
                     else:
                         st.warning("Please upload the reports first.")
                 except Exception as e:
@@ -33,4 +38,4 @@ def chat_interface():
                         "Sorry, an error occurred while processing your question."
                     )
                     st.error(error_msg)
-                    # logger.error(f"Error processing question '{prompt}': {str(e)}")
+                    logger.error(f"Error processing question '{prompt}': {str(e)}")

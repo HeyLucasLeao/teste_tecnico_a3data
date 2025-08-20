@@ -5,6 +5,7 @@ from src.vector_store import load_documents, process_reports, vector_store_in_me
 from src.assistant import EpidemiologicalAssistant
 from src.chat_interface import chat_interface
 import tempfile
+from src.logging import logger
 
 
 def main():
@@ -29,8 +30,12 @@ def main():
     if uploaded_files and st.session_state.assistant is None:
         with st.spinner("Processing documents and preparing the assistant..."):
             try:
+                logger.info(
+                    f"Starting document processing for {len(uploaded_files)} files"
+                )
                 with tempfile.TemporaryDirectory() as temp_dir:
                     for uploaded_file in uploaded_files:
+                        logger.debug(f"Processing file: {uploaded_file.name}")
                         temp_path = os.path.join(temp_dir, uploaded_file.name)
                         with open(temp_path, "wb") as f:
                             f.write(uploaded_file.getbuffer())
@@ -38,17 +43,23 @@ def main():
                     documents = load_documents(temp_dir)
                     processed_docs = process_reports(documents)
                     vector_store = vector_store_in_memory(processed_docs)
+                    logger.debug(
+                        f"Processed and vectorized {len(processed_docs)} document pages"
+                    )
 
                     assistant = EpidemiologicalAssistant(vector_store)
 
                     st.session_state.vector_store = vector_store
                     st.session_state.assistant = assistant
-
-                    st.success(
+                    success_msg = (
                         "Documents processed successfully! You can now ask questions."
                     )
+                    logger.info(success_msg)
+                    st.success(success_msg)
             except Exception as e:
-                st.error(f"Error processing documents: {str(e)}")
+                error_msg = f"Error processing documents: {str(e)}"
+                logger.error(error_msg, exc_info=True)
+                st.error(error_msg)
 
     chat_interface()
 
