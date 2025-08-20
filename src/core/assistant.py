@@ -81,17 +81,13 @@ class EpidemiologicalAssistant:
         custom_prompt = PromptTemplate(
             template="""
             As a EU epidemiological expert, analyze the provided data to answer the question precisely and evidence-based.
+            Base your answer strictly on the provided data only.
+            Keep response concise but informative (3-4 sentences maximum).
+            Avoid speculation beyond the provided data.
             
             DATA: {context}
 
             QUESTION: {input}
-
-            INSTRUCTIONS:
-            - Base your answer strictly on the provided data only
-            - Keep response concise but informative (3-4 sentences maximum)
-            - Avoid speculation beyond the provided data
-
-            EXPERT ANALYSIS:
             """,
             input_variables=["context", "input"],
         )
