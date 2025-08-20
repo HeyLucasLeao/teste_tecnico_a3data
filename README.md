@@ -17,3 +17,8 @@ make run
 - Será iniciada uma interface Streamlit
 - Faça upload dos PDFs desejados para processamento
 - Utilize o chat para interagir com o assistente
+
+# Utilizar via Docker
+- Make docker-build
+- Make docker-run
+- Nota: provavelmente deve demorar por conta da dependência com a biblioteca da nvidia!
