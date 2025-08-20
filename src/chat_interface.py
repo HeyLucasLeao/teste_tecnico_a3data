@@ -4,6 +4,7 @@ from time import time
 
 
 def chat_interface():
+    "Helper function to create the chat interface from Streamlit"
     for message in st.session_state.messages:
         with st.chat_message(message["role"]):
             st.markdown(message["content"])

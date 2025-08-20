@@ -2,6 +2,8 @@ import re
 
 
 def do_preprocessing(text: str):
+    """Preprocess text by removing multiple whitespaces and trimming."""
+
     def _strip_multiple_whitespaces(s):
         re_whitespace = re.compile(r"(\s)+", re.UNICODE)
         return re_whitespace.sub(" ", s)

@@ -2,6 +2,7 @@ import streamlit as st
 
 
 def file_uploader():
+    "Helper function to create subheader upload"
     st.subheader("Report Upload")
     uploaded_files = st.file_uploader(
         "Select the PDF reports",
