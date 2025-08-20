@@ -80,11 +80,18 @@ class EpidemiologicalAssistant:
 
         custom_prompt = PromptTemplate(
             template="""
-            As an EU epidemiological expert, analyze this data to answer the question precisely.
-
+            As a EU epidemiological expert, analyze the provided data to answer the question precisely and evidence-based.
+            
             DATA: {context}
 
             QUESTION: {input}
+
+            INSTRUCTIONS:
+            - Base your answer strictly on the provided data only
+            - Keep response concise but informative (3-4 sentences maximum)
+            - Avoid speculation beyond the provided data
+
+            EXPERT ANALYSIS:
             """,
             input_variables=["context", "input"],
         )
@@ -93,7 +100,13 @@ class EpidemiologicalAssistant:
 
         self.retrieval_chain = create_retrieval_chain(
             self.vector_store.as_retriever(
-                search_type="mmr", search_kwargs={"k": 5, "fetch_k": 10}
+                search_type="mmr",
+                search_kwargs={
+                    "k": 8,  # Best 'K' chunks to choose better context
+                    "fetch_k": 20,  # Better pool
+                    "lambda_mult": 0.7,  # Balanced of relevance/Diversity
+                    "score_threshold": 0.6,  # Minimal Threshold on similarity
+                },
             ),
             combine_docs_chain,
         )

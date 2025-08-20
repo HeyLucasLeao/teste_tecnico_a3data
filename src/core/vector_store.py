@@ -64,14 +64,21 @@ def vector_store_in_memory(documents: List[Document]) -> FAISS:
         FAISS vector store containing the document embeddings
 
     Note:
-        Uses 'all-distilroberta-v1' model with CPU device and normalized embeddings
+        Uses 'all-mpnet-base-v2' model with CPU device and normalized embeddings
     """
     embeddings = HuggingFaceEmbeddings(
-        model_name="sentence-transformers/all-distilroberta-v1",
+        model_name="sentence-transformers/all-mpnet-base-v2",
         model_kwargs={"device": "cpu"},
-        encode_kwargs={"normalize_embeddings": True},
+        encode_kwargs={
+            "normalize_embeddings": True,
+            "batch_size": 32,
+        },
     )
 
-    vector_store = FAISS.from_documents(documents, embeddings)
+    vector_store = FAISS.from_documents(
+        documents,
+        embeddings,
+        distance_strategy="COSINE",
+    )
 
     return vector_store
